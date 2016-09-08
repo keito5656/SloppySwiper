@@ -64,7 +64,7 @@ UIViewAnimationOptions const SSWNavigationTransitionCurve = 7 << 16;
     BOOL tabBarControllerContainsToViewController = [tabBarController.viewControllers containsObject:toViewController];
     BOOL tabBarControllerContainsNavController = [tabBarController.viewControllers containsObject:navController];
     BOOL isToViewControllerFirstInNavController = [navController.viewControllers firstObject] == toViewController;
-    if (tabBar && (tabBarControllerContainsToViewController || (isToViewControllerFirstInNavController && tabBarControllerContainsNavController))) {
+    if (tabBar) {
         [tabBar.layer removeAllAnimations];
         
         CGRect tabBarRect = tabBar.frame;
@@ -77,7 +77,7 @@ UIViewAnimationOptions const SSWNavigationTransitionCurve = 7 << 16;
 
     // Uses linear curve for an interactive transition, so the view follows the finger. Otherwise, uses a navigation transition curve.
     UIViewAnimationOptions curveOption = UIViewAnimationOptionCurveEaseOut;
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 options:curveOption animations:^{
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         fromViewController.view.transform = CGAffineTransformMakeTranslation(toViewController.view.frame.size.width, 0);
 
     } completion:^(BOOL finished) {
